@@ -1,0 +1,1 @@
+{"version":3,"file":"NewsService.js","sourceRoot":"","sources":["NewsService.ts"],"names":[],"mappings":"AAAA;;GAEG;;;;;;;;;;;;;;;;;;;AAEH,sCAAyC;AACzC,6CAAoE;AA2BpE,IAAa,WAAW;IAAS,+BAA4C;IAA7E;;IAA+E,CAAC;IAAD,kBAAC;AAAD,CAAC,AAAhF,CAAiC,2BAAY,GAAmC;AAAnE,WAAW;IAJvB,iBAAU,EAAE;IACZ,6BAAc,CAAC;QACd,GAAG,EAAE,8BAA8B;KACpC,CAAC;GACW,WAAW,CAAwD;AAAnE,kCAAW"}

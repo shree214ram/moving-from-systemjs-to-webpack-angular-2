@@ -1,0 +1,762 @@
+<div class="animated fadeIn">
+
+
+  <table class="table table-bordered table-striped table-sm">
+    <thead>
+    <tr>
+      <th>1 SECURITY</th>
+      <th>2 DATE</th>
+      <th>3 DAILY CHART</th>
+      <th>4.1 TIME</th>
+      <th>4.2 HEADLINE</th>
+      <th>4.3 REACTION</th>
+      <th>4.4 echo</th>
+      <th>4.5 RELATED</th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tbody *ngFor="let cluster of newsClusters">
+      <tr>
+        <td rowspan="3" align="top">
+          <strong class="">{{cluster.security}}</strong>
+          <br>
+          <small class="text-muted">Valeant<br>Pharma</small>
+        </td>
+        <td rowspan="3" align="top" class="small">{{cluster.date | date:'y/MM/dd'}}</td>
+        <td rowspan="3" align="top">my chart</td>
+
+        <ng-container *ngIf ="cluster.news && cluster.news[0]; else elseBlock">
+          <ng-container *ngFor="let n of cluster.news; first as isFirst">
+            <ng-container *ngIf="isFirst">
+            <td class="small">{{n.time | date:'HH:mm:ss'}}</td>
+            <td>{{n.headline}}</td>
+            <td class="small">
+              <ng-container *ngIf="n.reaction >= 0; else elseBlock">
+                <span class="badge badge-danger small"> <i class="icon-arrow-down"></i> {{n.reaction}}%</span>
+              </ng-container>
+              <ng-template #elseBlock>
+                <span class="badge badge-success small"> <i class="icon-arrow-up"></i> {{n.reaction}}%</span>
+              </ng-template>
+
+            </td>
+            <td>{{n.echo}}</td>
+            <td>{{n.related}}</td>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+        <ng-template #elseBlock>
+          <td class="small">col4.1</td>
+          <td>col4.2</td>
+          <td>col4.3</td>
+          <td>col4.4</td>
+          <td>col4.5</td>
+        </ng-template>
+
+        <td rowspan="3" align="top">buttons</td>
+      </tr>
+
+      <ng-container *ngIf ="cluster.news && cluster.news[0];">
+        <ng-container *ngFor="let n of cluster.news; first as isFirst">
+          <ng-container *ngIf="!isFirst">
+            <tr>
+              <td class="small">{{n.time | date:'HH:mm:ss'}}</td>
+              <td>{{n.headline}}</td>
+              <td class="small">
+                <ng-container *ngIf="n.reaction >= 0; else elseBlock">
+                  <span class="badge badge-danger small"> <i class="icon-arrow-down"></i> {{n.reaction}}%</span>
+                </ng-container>
+                <ng-template #elseBlock>
+                  <span class="badge badge-success small"> <i class="icon-arrow-up"></i> {{n.reaction}}%</span>
+                </ng-template>
+              </td>
+              <td>{{n.echo}}</td>
+              <td>{{n.related}}</td>
+            </tr>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+
+    </tbody>
+  </table>
+
+  <!-- ng2-rest test -->
+  <div>
+    <h2>Hello {{name}}</h2>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+      </tr>
+      </thead>
+      <tbody *ngIf="users && users.length > 0" >
+      <tr *ngFor="let user of users" >
+        <td>{{user.id}}</td>
+        <td>{{user.name}}</td>
+      </tr>
+
+      </tbody>
+      <tbody *ngIf="!(users && users.length > 0)"  >
+      <tr>
+        <td>Loading data</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!--  end of test -->
+
+
+</div>
+
+
+
+
+
+
+<!-- STATIC EXAMPLE -->
+<!--
+<table class="table table-bordered table-striped table-sm ">
+  <thead>
+    <tr>
+      <th>SECURITY</th>
+      <th>DATE</th>
+      <th>DAILY CHART</th>
+      <th>TIME</th>
+      <th>HEADLINE</th>
+      <th>REACTION</th>
+      <th>echo</th>
+      <th>RELATED</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr>
+      <td>
+        <strong class="">VRX</strong>
+        <br>
+        <small class="text-muted">Valeant<br>Pharma</small>
+      </td>
+      <td>2017/04/03</td>
+      <td>
+        <div class="chart-wrapper" style="width:100px;height:30px;">
+          <canvas baseChart class="chart"
+                  [datasets]="sparklineChartData1"
+                  [labels]="sparklineChartLabels"
+                  [options]="sparklineChartOptions"
+                  [colors]="sparklineChartInfo"
+                  [legend]="sparklineChartLegend"
+                  [chartType]="sparklineChartType"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </td>
+
+      <td>
+        <table class="table  table-sm">
+          <tbody>
+          <tr>15:03</tr>
+          <tr>18:45</tr>
+          <tr>20:10</tr>
+          </tbody>
+        </table>
+      </td>
+
+      <td>
+        <table class="table  table-sm">
+          <tbody>
+          <tr>Could this be the Pharmaceutical Enron?</tr>
+          <tr>Valeant Pharmaceuticals Responds To Erroneous Report</tr>
+          <tr>Bill Ackman buys 2m additional $VRX shares today</tr>
+          </tbody>
+        </table>
+      </td>
+
+      <td>
+        <table class="table  table-sm">
+          <tbody>
+            <tr>
+              <span class="badge badge-danger"> <i class="icon-arrow-down"></i>40.5%</span>
+            </tr>
+            <tr>
+              <span class="badge badge-success"> <i class="icon-arrow-up"></i>34.2%</span>
+            </tr>
+            <tr></tr>
+          </tbody>
+        </table>
+      </td>
+
+      <td>
+        <table class="table  table-sm">
+          <tbody>
+          <tr>43</tr>
+          <tr>28</tr>
+          <tr>34</tr>
+          </tbody>
+        </table>
+      </td>
+
+      <td>
+        <table class="table  table-sm">
+          <tbody>
+          <tr>
+            <span class="title">TEVA</span>
+            <div class="bars">
+              <div class="progress progress-xs">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+          </tr>
+          <tr>
+            <span class="title">SHPG</span>
+            <div class="bars">
+              <div class="progress progress-xs">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: 37%" aria-valuenow="37" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+          </tr>
+          <tr></tr>
+          </tbody>
+        </table>
+      </td>
+
+      <td>
+        <i class="icon-close"></i>
+        <br>
+        <i class="icon-pin"></i>
+      </td>
+    </tr>
+
+
+
+
+    <tr>
+      <td>
+        <strong class="">BIIB</strong>
+        <br>
+        <small class="text-muted">Biogen<br>Inc</small>
+
+      </td>
+      <td>2017/04/03</td>
+      <td>
+        <div class="chart-wrapper" style="width:100px;height:30px;">
+          <canvas baseChart class="chart"
+                  [datasets]="sparklineChartData2"
+                  [labels]="sparklineChartLabels"
+                  [options]="sparklineChartOptions"
+                  [colors]="sparklineChartSuccess"
+                  [legend]="sparklineChartLegend"
+                  [chartType]="sparklineChartType"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </td>
+      <td>
+        <table class="table  table-sm">
+          <tbody>
+          <tr>11:00</tr>
+          <tr>15:11</tr>
+          <tr>14:05</tr>
+          </tbody>
+        </table>
+      </td>
+
+      <td>
+        <table class="table  table-sm">
+          <tbody>
+          <tr>New Data Shows Strong, Sustained Effect of TECFIDE</tr>
+          <tr>Mangrove's August Goes Where Kyle Bsas Hasn't in Past</tr>
+          <tr>Sustainability tests get a positive result. Over 3 in 6 tests</tr>
+          </tbody>
+        </table>
+      </td>
+
+      <td>
+        <table class="table  table-sm">
+          <tbody>
+          <tr>
+            <span class="badge badge-success"> <i class="icon-arrow-up"></i>2.31%</span>
+          </tr>
+          <tr>
+            <span class="badge badge-danger"> <i class="icon-arrow-down"></i>0.9%</span>
+          </tr>
+          <tr>
+            <span class="badge badge-success"> <i class="icon-arrow-up"></i>1.22%</span>
+          </tr>
+          </tbody>
+        </table>
+      </td>
+
+      <td>
+        <table class="table  table-sm">
+          <tbody>
+            <tr>35</tr>
+            <tr>4</tr>
+            <tr>12</tr>
+          </tbody>
+        </table>
+      </td>
+
+      <td>
+        <table class="table  table-sm">
+          <tbody>
+          <tr>
+            <span class="title">TEVA</span>
+            <div class="bars">
+              <div class="progress progress-xs">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+          </tr>
+          <tr>
+            <span class="title">ABBV</span>
+            <div class="bars">
+              <div class="progress progress-xs">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+          </tr>
+          <tr>
+            <span class="title">ACOR</span>
+            <div class="bars">
+              <div class="progress progress-xs">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+          </tr>
+          </tbody>
+        </table>
+      </td>
+
+      <td>
+        <i class="icon-close"></i>
+        <br>
+        <i class="icon-pin"></i>
+      </td>
+    </tr>
+
+
+
+  <tr>
+      <td>
+        <strong class="">TEVA</strong>
+        <br>
+        <small class="text-muted">Teva<br>Pharma</small>
+      </td>
+      <td>2017/04/03</td>
+      <td>
+        <div class="chart-wrapper" style="width:100px;height:30px;">
+          <canvas baseChart class="chart"
+                  [datasets]="sparklineChartData2"
+                  [labels]="sparklineChartLabels"
+                  [options]="sparklineChartOptions"
+                  [colors]="sparklineChartPrimary"
+                  [legend]="sparklineChartLegend"
+                  [chartType]="sparklineChartType"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </td>
+
+      <td>
+        <table class="table  table-sm">
+          <tbody>
+          <tr>11:00</tr>
+          <tr>11:45</tr>
+          <tr>12:21</tr>
+          </tbody>
+        </table>
+      </td>
+
+      <td>
+        <table class="table  table-sm">
+          <tbody>
+          <tr>Could this be the Pharmaceutical Enron?</tr>
+          <tr>Valeant Pharmaceuticals Responds To Erroneous Report</tr>
+          <tr>Bill Ackman buys 2m additional $VRX shares today</tr>
+          </tbody>
+        </table>
+      </td>
+
+      <td>
+        <table class="table  table-sm">
+          <tbody>
+          <tr>
+            <span class="badge badge-danger"> <i class="icon-arrow-down"></i>5.50%</span>
+          </tr>
+          <tr>
+            <span class="badge badge-success"> <i class="icon-arrow-up"></i>1.20%</span>
+          </tr>
+          <tr></tr>
+          </tbody>
+        </table>
+      </td>
+
+      <td>
+        <table class="table  table-sm">
+          <tbody>
+          <tr>34</tr>
+          <tr>8</tr>
+          <tr></tr>
+          </tbody>
+        </table>
+      </td>
+
+      <td>
+        <table class="table  table-sm">
+          <tbody>
+          <tr>
+            <span class="title">BIIB</span>
+            <div class="bars">
+              <div class="progress progress-xs">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+          </tr>
+          <tr>
+            <span class="title">ABBV</span>
+            <div class="bars">
+              <div class="progress progress-xs">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+          </tr>
+          <tr>
+            <span class="title">ACOR</span>
+            <div class="bars">
+              <div class="progress progress-xs">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+          </tr>
+          </tbody>
+        </table>
+      </td>
+
+      <td>
+        <i class="icon-close"></i>
+        <br>
+        <i class="icon-pin"></i>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+<nav>
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+    <li class="page-item active">
+      <a class="page-link" href="#">1</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">4</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
+
+</div>
+
+-->
+
+
+
+
+
+<!-- <table class="table table-bordered table-striped table-sm "> -->
+<!--
+<table>
+  <thead>
+  <tr>
+    <th>1 SECURITY</th>
+    <th>2 DATE</th>
+    <th>3 DAILY CHART</th>
+    <th>4.1 TIME</th>
+    <th>4.2 HEADLINE</th>
+    <th>4.3 REACTION</th>
+    <th>4.4 echo</th>
+    <th>4.5 RELATED</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let cluster of newsClusters">
+
+      <td>{{cluster.security}}</td>
+
+      <td>{{cluster.date}}</td>
+
+      <td>Expected chart</td>
+
+      <td *ngFor="let news of cluster.news">
+        <table>
+          <tbody>
+          <tr>{{news.time}}</tr>
+          </tbody>
+        </table>
+      </td>
+
+      <td *ngFor="let news of cluster.news">
+        <table>
+          <tbody>
+          <tr>{{news.headline}}</tr>
+          </tbody>
+        </table>
+      </td>
+
+      <td *ngFor="let news of cluster.news">
+        <table>
+          <tbody>
+          <tr>
+            {{news.time}}
+          </tr>
+          </tbody>
+        </table>
+      </td>
+
+      <td *ngFor="let news of cluster.news">
+        <table>
+          <tbody>
+          <tr>{{news.echo}}</tr>
+          </tbody>
+        </table>
+      </td>
+
+      <td>
+        <table>
+          <tbody>
+          <tr>
+            TEVA
+          </tr>
+          <tr>
+            SHPG
+          </tr>
+          <tr></tr>
+          </tbody>
+        </table>
+      </td>
+
+
+      <td>
+        sdfsdfsdfsdfsdf
+      </td>
+    </tr>
+
+
+  </tbody>
+</table>
+-->
+
+<!--
+<ul>
+  <li *ngFor="let hero of heroes"
+      [class.selected]="hero === selectedHero"
+      (click)="onSelect(hero)">
+    {{hero.name}}
+  </li>
+</ul>
+
+  <ul>
+    <li *ngFor="let hero of heroes"
+        [class.selected]="hero === selectedHero"
+        (click)="onSelect(hero)">
+      {{hero.name}}
+    </li>
+  </ul>
+
+  <template ngFor let-breadcrumb [ngForOf]="breadcrumbs" let-last = last>
+    <li class="breadcrumb-item"
+        *ngIf="breadcrumb.label.title&&breadcrumb.url.substring(breadcrumb.url.length-1) == '/' || breadcrumb.label.title&&last"
+        [ngClass]="{active: last}">
+      <a *ngIf="!last" [routerLink]="breadcrumb.url">{{breadcrumb.label.title}}</a>
+      <span *ngIf="last" [routerLink]="breadcrumb.url">{{breadcrumb.label.title}}</span>
+    </li>
+  </template>
+
+  <ul>
+    <li *ngFor="let hero of heroes"
+        [class.selected]="hero === selectedHero"
+        (click)="onSelect(hero)">
+      {{hero.name}}
+    </li>
+  </ul>
+
+-->
+  <!--
+  <template ngFor let-breadcrumb [ngForOf]="breadcrumbs" let-last = last>
+    <li class="breadcrumb-item"
+        *ngIf="breadcrumb.label.title&&breadcrumb.url.substring(breadcrumb.url.length-1) == '/' || breadcrumb.label.title&&last"
+        [ngClass]="{active: last}">
+      <a *ngIf="!last" [routerLink]="breadcrumb.url">{{breadcrumb.label.title}}</a>
+      <span *ngIf="last" [routerLink]="breadcrumb.url">{{breadcrumb.label.title}}</span>
+    </li>
+  </template>
+  -->
+
+  <!--
+  <ul>
+    <li *ngFor="let hero of heroes"
+        [class.selected]="hero === selectedHero"
+        (click)="onSelect(hero)">
+      {{hero.name}}
+    </li>
+  </ul>
+  -->
+
+<!--
+  <ul>
+    <li *ngFor="let n of news">
+      <span>{{n.headline}}</span> {{n.echo}}
+    </li>
+  </ul>
+-->
+
+
+
+
+  <!-- Attempt to make a dynamic table -->
+  <!--
+  <table class="table table-bordered table-striped table-sm ">
+    <thead>
+    <tr>
+      <th>SECURITY</th>
+      <th>DATE</th>
+      <th>DAILY CHART</th>
+      <th>TIME</th>
+      <th>HEADLINE</th>
+      <th>REACTION</th>
+      <th>echo</th>
+      <th>RELATED</th>
+      <th></th>
+    </tr>
+    </thead>
+
+
+    <tbody>
+    <tr *ngFor="let cluster of newsClusters">
+      <td>
+        <strong class="">{{cluster.security}}</strong>
+        <br>
+        <small class="text-muted">TODO</small>
+      </td>
+      <td>
+        <div class="chart-wrapper" style="width:100px;height:30px;">
+          <canvas baseChart class="chart"
+                  [datasets]="sparklineChartData1"
+                  [labels]="sparklineChartLabels"
+                  [options]="sparklineChartOptions"
+                  [colors]="sparklineChartInfo"
+                  [legend]="sparklineChartLegend"
+                  [chartType]="sparklineChartType"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </td>
+
+      <td *ngFor="let news of cluster.news">
+        <table class="table  table-sm">
+          <tbody>
+          <tr>{{news.time | date:'HH:mm:ss'}}</tr>
+          </tbody>
+        </table>
+      </td>
+
+      <td *ngFor="let news of cluster.news">
+        <table class="table  table-sm">
+          <tbody>
+          <tr>{{news.headline}}</tr>
+          </tbody>
+        </table>
+      </td>
+
+      <td *ngFor="let news of cluster.news">
+        <table class="table  table-sm">
+          <tbody>
+          <tr>
+            <span class="badge badge-danger"> <i class="icon-arrow-down"></i>{{news.time | percent}}</span>
+          </tr>
+          </tbody>
+        </table>
+      </td>
+
+      <td *ngFor="let news of cluster.news">
+        <table class="table  table-sm">
+          <tbody>
+          <tr>{{news.echo}}</tr>
+          </tbody>
+        </table>
+      </td>
+
+      <td>
+        <table class="table  table-sm">
+          <tbody>
+          <tr>
+            <span class="title">TEVA</span>
+            <div class="bars">
+              <div class="progress progress-xs">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+          </tr>
+          <tr>
+            <span class="title">SHPG</span>
+            <div class="bars">
+              <div class="progress progress-xs">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: 37%" aria-valuenow="37" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+          </tr>
+          <tr></tr>
+          </tbody>
+        </table>
+      </td>
+
+      <td>
+        <i class="icon-close"></i>
+        <br>
+        <i class="icon-pin"></i>
+      </td>
+    </tr>
+
+
+    </tbody>
+  </table>
+  -->
+
+
+
+
+<!--
+
+<div>
+  <ul>
+    <li>sdf 1</li>
+    <li>sdf 2</li>
+    <li>sdf 3</li>
+    <li>{{clickMessage}}</li>
+  </ul>
+
+</div>
+
+
+  <table class="table table-bordered table-striped table-sm ">
+  <thead>
+  <tr>
+    <th>NEWS</th>
+  </tr>
+  </thead>
+
+  <tbody>
+
+  <tr *ngFor="let n of news">
+    <td>
+      {{n.headline}}
+    </td>
+  </tr>
+  </tbody>
+</table>
+-->
