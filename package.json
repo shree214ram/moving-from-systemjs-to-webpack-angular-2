@@ -1,20 +1,20 @@
 {
-  "name": "athena-dark-gain",
-  "homepage": "http://darkdata.finance",
-  "url": "http://darkdata.finance",
-  "copyright": "© 2017 Athena Portfolio Solutions LTD. All Rights Reserved",
-  "license": "Athena Portfolio Solutions LTD license",
-  "author": "Stanislas Rusinsky",
+  "name": "Angular2-SystemJs-To-Webpack",
+  "homepage": "http://localhost:4200",
+  "url": "http://localhost:4200",
+  "copyright": "© 2017 Kronosrock Web Solution Indore. All Rights Reserved",
+  "license": "Kronosrock Web Solution Indore license",
+  "author": "Sunny Parmar",
   "contributors": [
-    "Ariel Attias <arielcars@gmail.com>"
+    "Shyam Parmar <shree214ram@gmail.com>" 
   ],
   "version": "0.5.0",
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.com/athenaps/athena_darkgain_frontend.git"
+    "url": "https://github.com/shree214ram/moving-from-systemjs-to-webpack-angular-2"
   },
   "bugs": {
-    "url": "https://bitbucket.com/athenaps/issues"
+    "url": ""
   },
   "private": true,
   "angular-cli": {},
